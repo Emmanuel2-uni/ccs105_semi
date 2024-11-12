@@ -25,7 +25,7 @@ const connection =  mysql.createConnection({
 connection.connect();
 
 //REPORT - CRUD
-app.get("/api/members", (req, res) => {
+app.get("/api/products", (req, res) => {
 
     connection.query("SELECT * FROM products", (err, rows, fields) => {
         if(err) throw err;
@@ -35,7 +35,7 @@ app.get("/api/members", (req, res) => {
 })
 
 //REPORT - CRUD - SEARCH
-app.get("/api/members/:id", (req, res) => {
+app.get("/api/products/:id", (req, res) => {
     const id = req.params.id
     //const first_name = req.params.first_name
     //res.send(id)
@@ -53,14 +53,14 @@ app.get("/api/members/:id", (req, res) => {
 
 //POST - CREATE - CRUD
 app.use(express.urlencoded({extended: false}))
-app.post("/api/members", (req, res) => {
-    const fname = req.body.fname;
-    const lname = req.body.lname;
-    const email = req.body.email;
-    const gender = req.body.gender;
-    const id = req.body.id;
+app.post("/api/products", (req, res) => {
+    const itemName = req.body.itemName;
+    const unitPrice = req.body.unitPrice;
+    const quantity = req.body.quantity;
+    const supplier = req.body.supplier;
+    //const id = req.body.id;
     
-    connection.query(`INSERT INTO products (first_name, last_name, email, gender) VALUES ('${fname}', '${lname}', '${email}', '${gender}')`, (err, rows, fields) => {
+    connection.query(`INSERT INTO products (itemName, unitPrice, quantity, supplier) VALUES ('${itemName}', '${unitPrice}', '${quantity}', '${supplier}')`, (err, rows, fields) => {
         if(err) throw err;
         res.json({msg: `Successfully inserted`})
     })
@@ -71,13 +71,13 @@ app.post("/api/members", (req, res) => {
 //POST - CREATE - CRUD
 app.use(express.urlencoded({extended: false}))
 app.put("/api/members", (req, res) => {
-    const fname = req.body.fname;
-    const lname = req.body.lname;
-    const email = req.body.email;
-    const gender = req.body.gender;
+    const itemName = req.body.itemName;
+    const unitPrice = req.body.unitPrice;
+    const quantity = req.body.quantity;
+    const supplier = req.body.supplier;
     const id = req.body.id;
 
-    connection.query(`UPDATE product SEt first_name='${fname}', last_name='${lname}', email='${email}', gender='${gender}' WHERE id='${id}'`, (err, rows, fields) => {
+    connection.query(`UPDATE product SEt first_name='${itemName}', last_name='${unitPrice}', email='${quantity}', gender='${supplier}' WHERE id='${id}'`, (err, rows, fields) => {
         if(err) throw err;
         res.json({msg: `Success`})
     })
