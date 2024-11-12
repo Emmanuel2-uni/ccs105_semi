@@ -58,7 +58,8 @@ app.post("/api/members", (req, res) => {
     const lname = req.body.lname;
     const email = req.body.email;
     const gender = req.body.gender;
-
+    const id = req.body.id;
+    
     connection.query(`INSERT INTO userdata (first_name, last_name, email, gender) VALUES ('${fname}', '${lname}', '${email}', '${gender}')`, (err, rows, fields) => {
         if(err) throw err;
         res.json({msg: `Successfully inserted`})
