@@ -27,7 +27,7 @@ connection.connect();
 //REPORT - CRUD
 app.get("/api/members", (req, res) => {
 
-    connection.query("SELECT * FROM userdata", (err, rows, fields) => {
+    connection.query("SELECT * FROM products", (err, rows, fields) => {
         if(err) throw err;
         res.json(rows)
 
@@ -40,7 +40,7 @@ app.get("/api/members/:id", (req, res) => {
     //const first_name = req.params.first_name
     //res.send(id)
     //res.send(first_name)
-    connection.query(`SELECT * FROM userdata WHERE id = ${id}`, (err, rows, fields) => {
+    connection.query(`SELECT * FROM products WHERE id = ${id}`, (err, rows, fields) => {
         if(err) throw err;
         if(rows.length > 0){
             res.json(rows)
@@ -60,7 +60,7 @@ app.post("/api/members", (req, res) => {
     const gender = req.body.gender;
     const id = req.body.id;
     
-    connection.query(`INSERT INTO userdata (first_name, last_name, email, gender) VALUES ('${fname}', '${lname}', '${email}', '${gender}')`, (err, rows, fields) => {
+    connection.query(`INSERT INTO products (first_name, last_name, email, gender) VALUES ('${fname}', '${lname}', '${email}', '${gender}')`, (err, rows, fields) => {
         if(err) throw err;
         res.json({msg: `Successfully inserted`})
     })
@@ -90,7 +90,7 @@ app.use(express.urlencoded({extended: false}))
 app.delete("/api/members", (req, res) => {
 
     const id = req.body.id
-    connection.query(`DELETE FROM userdata WHERE id = '${id}'`, (err, rows, fields) => {
+    connection.query(`DELETE FROM products WHERE id = '${id}'`, (err, rows, fields) => {
         if(err) throw err;
         res.json({msg: `Successfully yeeted`})
 
