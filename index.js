@@ -68,16 +68,16 @@ app.post("/api/products", (req, res) => {
 })
 
 
-//POST - CREATE - CRUD
+//POST - UPDATE - CRUD
 app.use(express.urlencoded({extended: false}))
-app.put("/api/members", (req, res) => {
+app.put("/api/products", (req, res) => {
     const itemName = req.body.itemName;
     const unitPrice = req.body.unitPrice;
     const quantity = req.body.quantity;
     const supplier = req.body.supplier;
     const id = req.body.id;
 
-    connection.query(`UPDATE product SEt first_name='${itemName}', last_name='${unitPrice}', email='${quantity}', gender='${supplier}' WHERE id='${id}'`, (err, rows, fields) => {
+    connection.query(`UPDATE product SET itemName='${itemName}', unitPrice='${unitPrice}', quantity='${quantity}', supplier='${supplier}' WHERE id='${id}'`, (err, rows, fields) => {
         if(err) throw err;
         res.json({msg: `Success`})
     })
@@ -87,7 +87,7 @@ app.put("/api/members", (req, res) => {
 
 // DELETE
 app.use(express.urlencoded({extended: false}))
-app.delete("/api/members", (req, res) => {
+app.delete("/api/products", (req, res) => {
 
     const id = req.body.id
     connection.query(`DELETE FROM products WHERE id = '${id}'`, (err, rows, fields) => {
